@@ -14,6 +14,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EventBus mEventBus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        mEventBus = EventBus.getDefault();
     }
 
     @Override
@@ -57,14 +62,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        EventBus.getDefault().register(this);
+        if (mEventBus != null) {
+            mEventBus.register(this);
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        EventBus.getDefault().unregister(this);
+        if (mEventBus != null) {
+            mEventBus.unregister(this);
+        }
     }
 
     @Subscribe

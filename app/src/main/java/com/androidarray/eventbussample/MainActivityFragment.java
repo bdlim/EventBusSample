@@ -16,11 +16,12 @@ import org.greenrobot.eventbus.EventBus;
  */
 public class MainActivityFragment extends Fragment {
 
+    EventBus mEventBus;
     EditText mEditText;
     Button mButton;
 
     public MainActivityFragment() {
-
+        mEventBus = EventBus.getDefault();
     }
 
     @Override
@@ -40,8 +41,8 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (mEditText != null && mEditText.getText() != null) {
-                    EventBus.getDefault().post(new TextEvent(mEditText.getText().toString()));
+                if (mEventBus != null && mEditText != null && mEditText.getText() != null) {
+                    mEventBus.post(new TextEvent(mEditText.getText().toString()));
                 }
             }
         });
