@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        super.onStop();
-
         if (mEventBus != null) {
             mEventBus.unregister(this);
         }
+
+        super.onStop();
     }
 
     @Subscribe
